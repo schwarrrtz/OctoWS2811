@@ -1,1 +1,4 @@
-file '/Users/malcolm/Movies/content_kaleido_300x8.mp4'
+file '/home/pi/Media/Test1_300by8.mov'
+file '/home/pi/Media/Test1_300by8.mov'
+file '/home/pi/Media/Test1_300by8.mov'
+file '/home/pi/Media/Test1_300by8.mov'
