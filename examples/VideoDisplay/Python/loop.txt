@@ -1,4 +1,4 @@
-file '/home/pi/Media/Test1_300by8.mov'
-file '/home/pi/Media/Test1_300by8.mov'
-file '/home/pi/Media/Test1_300by8.mov'
-file '/home/pi/Media/Test1_300by8.mov'
+file '/Users/malcolm/Movies/Content/decibel/content_kaleido_300x16.mp4'
+file '/Users/malcolm/Movies/Content/decibel/content_kaleido_300x16.mp4'
+file '/Users/malcolm/Movies/Content/decibel/content_kaleido_300x16.mp4'
+file '/Users/malcolm/Movies/Content/decibel/content_kaleido_300x16.mp4'
