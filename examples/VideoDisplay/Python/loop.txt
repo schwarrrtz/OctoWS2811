@@ -1,4 +1,4 @@
-file '/Users/malcolm/Movies/Content/decibel/content_kaleido_300x16.mp4'
-file '/Users/malcolm/Movies/Content/decibel/content_kaleido_300x16.mp4'
-file '/Users/malcolm/Movies/Content/decibel/content_kaleido_300x16.mp4'
-file '/Users/malcolm/Movies/Content/decibel/content_kaleido_300x16.mp4'
+file '/Users/malcolm/Movies/video_wall_test1_300x8.mov'
+file '/Users/malcolm/Movies/video_wall_test1_300x8.mov'
+file '/Users/malcolm/Movies/video_wall_test1_300x8.mov'
+file '/Users/malcolm/Movies/video_wall_test1_300x8.mov'

@@ -13,10 +13,7 @@ port = '/dev/tty.usbmodem408061'
 command =   [ 'ffmpeg',
         '-loglevel', 'warning', 
         '-f', 'concat',
-        #'-r', '10',
         '-i', 'loop.txt',
-        #'-r', '1',
-        #'-filter:v', "select='mod(n-1, 10)'",
         '-f', 'image2pipe', 
         '-pix_fmt', 'rgb24',
         '-vcodec', 'rawvideo', '-']

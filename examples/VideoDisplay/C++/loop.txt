@@ -1,4 +1,4 @@
-file '/home/pi/Media/Test1_300by8.mov'
-file '/home/pi/Media/Test1_300by8.mov'
-file '/home/pi/Media/Test1_300by8.mov'
-file '/home/pi/Media/Test1_300by8.mov'
+file '/Users/malcolm/Movies/video_wall_test1_300x8.mov'
+file '/Users/malcolm/Movies/video_wall_test1_300x8.mov'
+file '/Users/malcolm/Movies/video_wall_test1_300x8.mov'
+file '/Users/malcolm/Movies/video_wall_test1_300x8.mov'
