@@ -1,4 +1,3 @@
-file '/Users/malcolm/Movies/video_wall_test1_300x8.mov'
-file '/Users/malcolm/Movies/video_wall_test1_300x8.mov'
-file '/Users/malcolm/Movies/video_wall_test1_300x8.mov'
-file '/Users/malcolm/Movies/video_wall_test1_300x8.mov'
+file '/home/pi/Media/Purple_300by16.mov'
+file '/home/pi/Media/Purple_300by16.mov'
+file '/home/pi/Media/Purple_300by16.mov'

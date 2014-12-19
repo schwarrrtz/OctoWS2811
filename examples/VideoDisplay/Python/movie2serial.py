@@ -8,7 +8,8 @@ width = 300
 height = 8
 
 # serial port connection to teensy
-port = '/dev/tty.usbmodem408061'
+# port = '/dev/tty.usbmodem408061'
+port = '/dev/ttyACM0'
 
 command =   [ 'ffmpeg',
         '-loglevel', 'warning', 
