@@ -1,3 +1,2 @@
-file '/home/pi/Media/Purple_300by16.mov'
-file '/home/pi/Media/Purple_300by16.mov'
-file '/home/pi/Media/Purple_300by16.mov'
+file '/home/pi/Media/Skylines_300by16.mov'
+file '/home/pi/Media/Skylines_300by16.mov'

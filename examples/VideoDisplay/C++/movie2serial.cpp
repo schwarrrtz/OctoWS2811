@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
+#include <cmath>
 #include <boost/asio.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
@@ -12,8 +13,8 @@ static int height = 16;
 
 static float max_framerate = 30.0;
 
-std::string port_name_0 = "/dev/ttyACM0";
-std::string port_name_1 = "/dev/ttyACM1";
+std::string port_name_0 = "/dev/ttyACM1";
+std::string port_name_1 = "/dev/ttyACM0";
 
 namespace b_io = boost::asio;
 namespace b_sys = boost::system;
@@ -38,7 +39,15 @@ int main(int argc, char* argv[])
         std::cerr << "error opening serial port - " << e.what() << std::endl;
         return 1;
     }
-    
+
+    // initialize gamma table
+    double gamma = 1.2;
+    int* gamma_table = (int*)malloc(256*sizeof(int));  
+    for(int i=0; i < 256; i++)
+    {
+        gamma_table[i] = (int) (pow((float)i / 255.0, gamma)*255 + 0.5);
+    }
+
     // ask videoDisplay for format information
     char query = '?';
     b_io::write(port0, b_io::buffer(&query, sizeof(query)));
@@ -61,11 +70,11 @@ int main(int argc, char* argv[])
     b_time::ptime oldTime;
     b_time::ptime newTime = b_time::microsec_clock::local_time();
     int frameCount = 0;    
-    char* inBuf = (char*)malloc(3*width*height*sizeof(char));
-    int* pixBuf0 = (int*)malloc(width*8*sizeof(int));
-    int* pixBuf1 = (int*)malloc(width*8*sizeof(int));
-    char* outBuf0 = (char*)malloc(3*(width*8 + 1)*sizeof(char));
-    char* outBuf1 = (char*)malloc(3*(width*8 + 1)*sizeof(char));
+    char* inBuf = (char*)calloc(3*width*height, sizeof(char));
+    int* pixBuf0 = (int*)calloc(width*8, sizeof(int));
+    int* pixBuf1 = (int*)calloc(width*8, sizeof(int));
+    char* outBuf0 = (char*)calloc(3*(width*8 + 1), sizeof(char));
+    char* outBuf1 = (char*)calloc(3*(width*8 + 1), sizeof(char));
     outBuf0[0] = '*'; outBuf0[1] = '0'; outBuf0[2] = '0';
     outBuf1[0] = '*'; outBuf1[1] = '0'; outBuf1[2] = '0';
 
@@ -75,24 +84,24 @@ int main(int argc, char* argv[])
         size_t bytesRead = 0;
         while((bytesRead < 3*width*height) && !feof(ffmpegPipe))
         {
-            bytesRead += fread((inBuf + bytesRead + 3), sizeof(char), 3*width*height - bytesRead, ffmpegPipe);
+            bytesRead += fread((inBuf + bytesRead), sizeof(char), 3*width*height - bytesRead, ffmpegPipe);
         }
         
         if (bytesRead != 3*width*height)
         {
-            std::cerr << "error reading frame" << std::endl;
-            return 1;
+            std::cerr << "error reading frame / finished reading file" << std::endl;
+            return 0;
         }
     
         // swizzle colours (input is rgb, chipset requires grb)
         // the first 3 bytes are format data that we don't touch
         for(int pixIndex = 0; pixIndex < width*height; pixIndex++)
         {  
-            int green = inBuf[3*(pixIndex+1) + 1] << 16;
-            int red = inBuf[3*(pixIndex+1)] << 8;
-            int blue = inBuf[3*(pixIndex+1) + 2];
+            int green = gamma_table[inBuf[3*pixIndex + 1]] << 16;
+            int red = gamma_table[inBuf[3*pixIndex]] << 8;
+            int blue = gamma_table[inBuf[3*pixIndex + 2]];
 
-            if(pixIndex > width*8)
+            if(pixIndex >= width*8)
             {
                 pixBuf1[pixIndex - width*8] = (int)(green | red | blue);
             }
@@ -132,7 +141,7 @@ int main(int argc, char* argv[])
 
         // calculate framerate & throttle if necessary        
 
-        usleep(50000);
+        //usleep(50000);
 
         /*
         oldTime = newTime;
